@@ -54,13 +54,13 @@ public class HotelController {
         return ResponseEntity.noContent().build();
     }
 
-    @DeleteMapping("/api/hotel/delete/id")
+    @DeleteMapping("/api/hotel/delete/by/id")
     public ResponseEntity<Value> deleteHotelId(@RequestParam Long id) {
         hotelRepository.deleteById(id);
         return ResponseEntity.noContent().build();
     }
 
-    @DeleteMapping("/api/hotel/delete/name")
+    @DeleteMapping("/api/hotel/delete/by/name")
     public ResponseEntity<String> deleteHotelByName(@RequestParam String name){
         Hotel hotel = hotelRepository.findByName(name);
         hotelRepository.deleteById(hotel.getId());

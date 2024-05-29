@@ -26,6 +26,7 @@ public class ContactEmailService {
     }
 
     //Удаление email по названию
+
     @Transactional
     public void deleteEmailByName(String email) {
         ContactEmail contactEmail = contactEmailRepository.findByEmail(email);

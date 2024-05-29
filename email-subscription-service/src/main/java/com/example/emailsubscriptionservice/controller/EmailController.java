@@ -7,7 +7,6 @@ import com.example.emailsubscriptionservice.exception.EmailNotFoundException;
 import com.example.emailsubscriptionservice.repository.ContactEmailRepository;
 import com.example.emailsubscriptionservice.service.ContactEmailService;
 import com.example.emailsubscriptionservice.utils.ContactEmailConverter;
-import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -33,10 +32,6 @@ public class EmailController {
 
     //Email set Methods
 
-    @Operation(
-            summary = "Сохранение сущности",
-            description = "Получает почту и кладет ее в базу данных"
-    )
     @PostMapping("/api/email/create")
     public ResponseEntity<String> createEmail(@Valid @RequestBody ContactEmailCart contactEmailCart) {
         contactEmailRepository.save(contactEmailConverter.fromContactEmailCart(contactEmailCart));
@@ -45,19 +40,12 @@ public class EmailController {
 
     //Email get Methods
 
-    @Operation(
-            summary = "Возвращение всех сущностей",
-            description = "Смотрит в базу данных и отправляет всех сущностей таблицы emails"
-    )
     @GetMapping("/api/email/get/all")
     public List<ContactEmail> getAllEmail() {
         return contactEmailRepository.findAll();
     }
 
-    @Operation(
-            summary = "Возвращение сущности по id",
-            description = "Находит сущность с переданым id и возвращает его"
-    )
+
     @GetMapping("/api/email/get/id")
     public ContactEmail getEmailOrId(@RequestParam int id) {
         return contactEmailRepository.findById(id).orElseThrow();
@@ -76,20 +64,12 @@ public class EmailController {
 
     //Email delete Methods
 
-    @Operation(
-            summary = "Удаление всех сущностей",
-            description = "Удалят все существующие сущности из бызы данных"
-    )
     @DeleteMapping("/api/email/delete/all")
     public ResponseEntity<Value> deleteAllEmail() {
         contactEmailRepository.deleteAll();
         return ResponseEntity.noContent().build();
     }
 
-    @Operation(
-            summary = "Удаление по id",
-            description = "Ищет в базе сущность с переданым id и ужалят его"
-    )
     @DeleteMapping("/api/email/delete/id")
     public ResponseEntity<Value> deleteEmail(@RequestParam int id) {
         contactEmailRepository.deleteById(id);
